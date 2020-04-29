@@ -25,5 +25,5 @@ p numeros.sum
 p numeros.map{|x|x.class}
 cadena = "hola mundo"
 p cadena.split(" ")
-p cadena.split(" ").map{|x| x.upcase}.join("\n")
+p cadena.split(" ").map{|x| x.upcase}.join("\n") 
 
