@@ -1,20 +1,16 @@
 $estadios = []
-$capacidades = []
-$ubicaciones = []
 
 $continentes = ["America", "Europa", "Africa", "Asia", "Oceania"]
 
 def RegistrarEstadio
     p "Nombre del estadio: "
     estadio = gets.chomp
-    $estadios<<estadio
     p "Capacidad: "
     capacidad = gets.chomp.to_i
-    $capacidades<<capacidad
     p "Continente (escoge entre 1 y 5)"
     ImprimirContinentes()
     ubicacion = gets.chomp.to_i
-    $ubicaciones<<ubicacion
+    $estadios << [estadio, capacidad, ubicacion]
     ImprimirRegistro()
 end
 
@@ -26,16 +22,13 @@ end
 
 def ImprimirRegistro
     for i in 0..$estadios.size-1
-        p "Estadio #{i+1}:#{$estadios[i]}, #{$capacidades[i]}, #{$continentes[$ubicaciones[i]-1]}"
+        p "Estadio #{i+1}: #{$estadios[i][0]}, #{$estadios[i][1]}, #{$continentes[$estadios[i][2]-1]}"
     end
 end
 
 def EstadiosNoContinente(continente)
-    for i in 0..$ubicaciones.size-1
-        if $ubicaciones[i]!=continente
-            p "Estadio: #{$estadios[i]}, #{$capacidades[i]}, #{$continentes[$ubicaciones[i]-1]}"
-        end
-    end
+    #p $estadios.select{|x| x[2]!=continente}.map{|x| "Estadio: #{x[0]}, con capacidad de #{x[1]} personas y queda en #{$continentes[x[2]-1]}"}.join("\n") 
+    $estadios.select{|x| x[2]!=continente}.each{|x| p "Estadio: #{x[0]}, con capacidad de #{x[1]} personas y queda en #{$continentes[x[2]-1]}"}
 end
 
 def EstadioMenorCapacidad(continente)
